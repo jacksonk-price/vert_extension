@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "Vert",
+    "description": "Easily convert a youtube video to wav",
+    "version": "1.0",
+    "permissions": ["activeTab", "scripting", "downloads", "tabs"],
+    "content_scripts": [{
+            "matches": ["https://www.youtube.com/*"],
+            "js": ["content.js"],
+            "css": ["stylesheets/style.css"]
+        }]
+}
