@@ -6,7 +6,10 @@
     "permissions": ["activeTab", "scripting", "downloads", "tabs"],
     "content_scripts": [{
             "matches": ["https://www.youtube.com/*"],
-            "js": ["content.js"],
+            "js": ["scripts/content.js"],
             "css": ["stylesheets/style.css"]
-        }]
+        }],
+    "background": {
+        "service_worker": "scripts/background.js"
+    }
 }
