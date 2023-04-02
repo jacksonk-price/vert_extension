@@ -1,0 +1,57 @@
+.download-btn {
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    min-width: 36px;
+    min-height: 36px;
+    margin-left: 8px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon {
+    margin: 0 auto;
+    height: 20px;
+}
+
+.success-icon {
+    fill: #86efac;
+}
+
+.error-icon {
+    fill: red;
+}
+
+.fa-spin {
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.dark-style {
+    background-color: #212121;
+}
+
+.dark-style:hover {
+    background-color: #303030;
+}
+
+.light-stroke {
+    fill: #e2e2e2;
+}
+
+.light-style:hover {
+    background: #e5e5e5;
+}
+
+.dark-stroke {
+    fill: #000;
+}
