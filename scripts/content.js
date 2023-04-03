@@ -70,6 +70,7 @@ const startExtension = () => {
         downloadButton.innerHTML = downloadIcon;
 
         downloadButton.addEventListener('click', function(){
+            downloadButton.disabled = true;
             downloadButton.innerHTML = loadingIcon;
             handleDownload();
         });
@@ -79,6 +80,7 @@ const startExtension = () => {
 
     const handleSuccess = (result) => {
         let downloadButton = getDownloadButton();
+
         const linkSource = "data:audio/wav;base64," + result["wav_base64"];
         const downloadLink = document.createElement("a");
         downloadLink.href = linkSource;
@@ -87,9 +89,10 @@ const startExtension = () => {
     
         downloadLink.click();
         document.body.removeChild(downloadLink);
-        downloadButton.innerHTML = successIcon;
 
+        downloadButton.innerHTML = successIcon;
         setTimeout(() => {
+            downloadButton.disabled = false;
             downloadButton.innerHTML = downloadIcon;
         }, 5000);
     }
@@ -100,6 +103,7 @@ const startExtension = () => {
         downloadButton.innerHTML = errorIcon;
 
         setTimeout(() => {
+            downloadButton.disabled = false;
             downloadButton.innerHTML = downloadIcon;
           }, 5000);
     }
