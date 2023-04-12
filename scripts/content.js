@@ -47,7 +47,7 @@ const startExtension = () => {
         const response = await fetchConversionResult(data);
         const result = await response.json();
     
-        if (result["status"] === "success") {
+        if (response.ok) {
             handleSuccess(result);
         } else {
             handleError();
@@ -80,10 +80,12 @@ const startExtension = () => {
 
     const handleSuccess = (result) => {
         let downloadButton = getDownloadButton();
-
-        const linkSource = "data:audio/wav;base64," + result["wav_base64"];
         const downloadLink = document.createElement("a");
-        downloadLink.href = linkSource;
+        let base64 = result["wav_base64"];
+        const blob = new Blob([base64], { type: "audio/wav" });
+        const blobUrl = URL.createObjectURL(blob);
+
+        downloadLink.href = blobUrl;
         downloadLink.download = `${result["video_title"]}.wav`;
         document.body.appendChild(downloadLink);
     
