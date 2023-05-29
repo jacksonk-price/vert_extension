@@ -55,10 +55,10 @@ const startExtension = () => {
     }
     
     async function fetchConversionResult(data) {
-        return await fetch('http://127.0.0.1:3000/convert', {
+        return await fetch('http://127.0.0.1:3000/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ inputurl: data })
+          body: JSON.stringify({ input_url: data })
         });
     }
 
@@ -80,17 +80,23 @@ const startExtension = () => {
 
     const handleSuccess = (result) => {
         let downloadButton = getDownloadButton();
-        const downloadLink = document.createElement("a");
         let base64 = result["wav_base64"];
-        const blob = new Blob([base64], { type: "audio/wav" });
-        const blobUrl = URL.createObjectURL(blob);
 
-        downloadLink.href = blobUrl;
+        const binaryString = window.atob(base64);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        const arrayBuffer = bytes.buffer;
+
+        const blob = new Blob([arrayBuffer], { type: 'audio/wav' });
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
         downloadLink.download = `${result["video_title"]}.wav`;
-        document.body.appendChild(downloadLink);
-    
+
         downloadLink.click();
-        document.body.removeChild(downloadLink);
+        downloadLink.remove();
 
         downloadButton.innerHTML = successIcon;
         setTimeout(() => {
