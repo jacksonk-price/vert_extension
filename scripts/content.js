@@ -21,7 +21,7 @@ chrome.runtime.onMessage.addListener((request) => {
       observer.observe(trackedElement, config);
 });
 
-const startExtension = () => {
+function startExtension() {
     boolStarted = true;
 
     const boolDarkMode = document.querySelector('html').hasAttribute('dark');
@@ -62,7 +62,7 @@ const startExtension = () => {
         });
     }
 
-    const createDownloadButton = () => {
+    function createDownloadButton() {
         let downloadButton = document.createElement('button');
         downloadButton.id = 'download-btn'
         downloadButton.classList.add('download-btn');
@@ -78,7 +78,7 @@ const startExtension = () => {
         menuRenderer.appendChild(downloadButton);
     }
 
-    const handleSuccess = (result) => {
+    function handleSuccess(result) {
         let downloadButton = getDownloadButton();
         let base64 = result["wav_base64"];
 
@@ -105,7 +105,7 @@ const startExtension = () => {
         }, 5000);
     }
 
-    const handleError = () => {
+    function handleError() {
         let downloadButton = getDownloadButton();
 
         downloadButton.innerHTML = errorIcon;
@@ -116,7 +116,7 @@ const startExtension = () => {
           }, 5000);
     }
 
-    const getDownloadButton = () => {
+    function getDownloadButton() {
         return document.getElementById('download-btn');
     }
 
